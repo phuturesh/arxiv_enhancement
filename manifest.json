@@ -1,0 +1,26 @@
+{
+    "manifest_version": 3,
+    "name": "arXiv Citation Counter",
+    "version": "1.0",
+    "description": "Automatically annotates arXiv search results with citation counts.",
+    "permissions": [
+        "activeTab",
+        "scripting"
+    ],
+    "host_permissions": [
+        "https://arxiv.org/*"
+    ],
+    "background": {
+        "service_worker": "background.js"
+    },
+    "content_scripts": [
+        {
+            "matches": [
+                "https://arxiv.org/search/*"
+            ],
+            "js": [
+                "content.js"
+            ]
+        }
+    ]
+}
