@@ -2,13 +2,19 @@
     "manifest_version": 3,
     "name": "arXiv Citation Counter",
     "version": "1.0",
-    "description": "Automatically annotates arXiv search results with citation counts.",
+    "description": "Automatically annotates arXiv search results with citation counts and provides quick navigation between PDF and abstract pages.",
+    "icons": {
+        "16": "icons/arxiv-enhancement.png",
+        "48": "icons/arxiv-enhancement.png",
+        "128": "icons/arxiv-enhancement.png"
+    },
     "permissions": [
         "activeTab",
         "scripting"
     ],
     "host_permissions": [
-        "https://arxiv.org/*"
+        "https://arxiv.org/*",
+        "https://alphaxiv.org/*"
     ],
     "background": {
         "service_worker": "background.js"
@@ -22,5 +28,9 @@
                 "content.js"
             ]
         }
-    ]
+    ],
+    "action": {
+        "default_title": "arXiv PDF to Abstract",
+        "default_icon": "icons/arxiv-enhancement.png"
+    }
 }
