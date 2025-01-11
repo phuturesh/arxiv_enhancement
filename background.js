@@ -8,23 +8,24 @@ chrome.action.onClicked.addListener((tab) => {
     const alphaxivAbsUrlPattern = /alphaxiv\.org\/abs\/(\d+\.\d+)/i;
     const alphaxivAbsMatch = tab.url.match(alphaxivAbsUrlPattern);
 
+    let newUrl;
+
     if (pdfMatch) {
         const arxivId = pdfMatch[1];
-        const absUrl = `https://arxiv.org/abs/${arxivId}`;
-        chrome.tabs.update(tab.id, { url: absUrl });
+        newUrl = `https://arxiv.org/abs/${arxivId}`;
     } else if (absMatch) {
         const arxivId = absMatch[1];
-        const pdfUrl = `https://arxiv.org/pdf/${arxivId}`;
-        chrome.tabs.update(tab.id, { url: pdfUrl });
+        newUrl = `https://arxiv.org/pdf/${arxivId}`;
     } else if (alphaxivPdfMatch) {
         const alphaxivId = alphaxivPdfMatch[1];
-        const absUrl = `https://alphaxiv.org/abs/${alphaxivId}`;
-        chrome.tabs.update(tab.id, { url: absUrl });
+        newUrl = `https://alphaxiv.org/abs/${alphaxivId}`;
     } else if (alphaxivAbsMatch) {
         const alphaxivId = alphaxivAbsMatch[1];
-        const pdfUrl = `https://alphaxiv.org/pdf/${alphaxivId}`;
-        chrome.tabs.update(tab.id, { url: pdfUrl });
+        newUrl = `https://alphaxiv.org/pdf/${alphaxivId}`;
     } else {
-        console.log(tab.url, "is not an valid Arxiv/Alphaxiv page.");
-    };
+        console.log(tab.url, "is not a valid Arxiv/Alphaxiv page.");
+        return;
+    }
+
+    chrome.tabs.update(tab.id, { url: newUrl });
 });
