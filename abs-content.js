@@ -11,7 +11,7 @@ async function enhanceAbsPage() {
     if (!aclUrl) return;
 
     const container = document.querySelector(".extra-services .full-text")
-    console.log('[arXiv-enhancement] container:', container);
+    // console.log('[arXiv-enhancement] container:', container);
     const aclButton = document.createElement("a");
     aclButton.href = aclUrl;
     aclButton.textContent = "🔗 View on ACL Anthology";
@@ -67,8 +67,8 @@ async function getAclLinkFromSemanticScholar(arxivId) {
 
     try {
         const data = await fetchDataFromSemanticScholar(url);
-        console.log("[arXiv-enhancement] url:", url);
-        console.log("[arXiv-enhancement] data:", data);
+        // console.log("[arXiv-enhancement] url:", url);
+        // console.log("[arXiv-enhancement] data:", data);
 
         // 1. 尝试从 externalIds 查找 ACL Anthology DOI
         if (data.externalIds?.ACL) {
