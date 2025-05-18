@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "arXiv Citation Counter",
-    "version": "1.0",
+    "version": "0.2.1",
     "description": "Automatically annotates arXiv search results with citation counts and provides quick navigation between PDF and abstract pages.",
     "icons": {
         "16": "icons/arxiv-enhancement.png",
@@ -14,7 +14,9 @@
     ],
     "host_permissions": [
         "https://arxiv.org/*",
-        "https://alphaxiv.org/*"
+        "https://alphaxiv.org/*",
+        "https://aclanthology.org/*",
+        "https://api.semanticscholar.org/*"
     ],
     "background": {
         "service_worker": "background.js"
@@ -25,8 +27,18 @@
                 "https://arxiv.org/search/*"
             ],
             "js": [
-                "content.js"
-            ]
+                "search-content.js"
+            ],
+            "run_at": "document_end"
+        },
+        {
+            "matches": [
+                "https://arxiv.org/abs/*"
+            ],
+            "js": [
+                "abs-content.js"
+            ],
+            "run_at": "document_start"
         }
     ],
     "action": {

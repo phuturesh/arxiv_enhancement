@@ -1,12 +1,12 @@
 chrome.action.onClicked.addListener((tab) => {
-    const pdfUrlPattern = /arxiv\.org\/pdf\/(\d+\.\d+)/i;
-    const pdfMatch = tab.url.match(pdfUrlPattern);
-    const absUrlPattern = /arxiv\.org\/abs\/(\d+\.\d+)/i;
-    const absMatch = tab.url.match(absUrlPattern);
-    const alphaxivPdfUrlPattern = /alphaxiv\.org\/pdf\/(\d+\.\d+)/i;
-    const alphaxivPdfMatch = tab.url.match(alphaxivPdfUrlPattern);
-    const alphaxivAbsUrlPattern = /alphaxiv\.org\/abs\/(\d+\.\d+)/i;
-    const alphaxivAbsMatch = tab.url.match(alphaxivAbsUrlPattern);
+    const _pdfUrlPattern = /arxiv\.org\/pdf\/(\d+\.\d+)/i;
+    const pdfMatch = tab.url.match(_pdfUrlPattern);
+    const _absUrlPattern = /arxiv\.org\/abs\/(\d+\.\d+)/i;
+    const absMatch = tab.url.match(_absUrlPattern);
+    const _alphaxivPdfUrlPattern = /alphaxiv\.org\/pdf\/(\d+\.\d+)/i;
+    const alphaxivPdfMatch = tab.url.match(_alphaxivPdfUrlPattern);
+    const _alphaxivAbsUrlPattern = /alphaxiv\.org\/abs\/(\d+\.\d+)/i;
+    const alphaxivAbsMatch = tab.url.match(_alphaxivAbsUrlPattern);
 
     let newUrl;
 
@@ -28,4 +28,14 @@ chrome.action.onClicked.addListener((tab) => {
     }
 
     chrome.tabs.update(tab.id, { url: newUrl });
+});
+
+chrome.runtime.onMessage.addListener((message, sender, sendResponse) => {
+    if (message.action === 'fetchSemanticScholar') {
+        fetch(message.url)
+            .then(res => res.json())
+            .then(data => sendResponse({ success: true, data }))
+            .catch(err => sendResponse({ success: false, error: err.message }));
+        return true; // 保持响应通道
+    }
 });

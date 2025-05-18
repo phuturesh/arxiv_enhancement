@@ -1,3 +1,7 @@
+/**************************
+** annotateSearchResults **
+**************************/
+
 async function getCitationCount(arxivId) {
     try {
         const response = await fetch(`https://api.semanticscholar.org/v1/paper/arXiv:${arxivId}`);
@@ -97,5 +101,6 @@ async function annotateSearchResults() {
         });
     }
 }
+
 
 window.addEventListener('load', annotateSearchResults);
