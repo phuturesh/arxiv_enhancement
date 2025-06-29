@@ -16,7 +16,8 @@
         "https://arxiv.org/*",
         "https://alphaxiv.org/*",
         "https://aclanthology.org/*",
-        "https://api.semanticscholar.org/*"
+        "https://api.semanticscholar.org/*",
+        "https://openreview.net/*"
     ],
     "background": {
         "service_worker": "background.js"

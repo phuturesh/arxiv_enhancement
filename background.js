@@ -7,6 +7,10 @@ chrome.action.onClicked.addListener((tab) => {
     const alphaxivPdfMatch = tab.url.match(_alphaxivPdfUrlPattern);
     const _alphaxivAbsUrlPattern = /alphaxiv\.org\/abs\/(\d+\.\d+)/i;
     const alphaxivAbsMatch = tab.url.match(_alphaxivAbsUrlPattern);
+    const _openreviewPdfUrlPattern = /openreview\.net\/pdf\?id=([^&]+)/i;
+    const openreviewPdfMatch = tab.url.match(_openreviewPdfUrlPattern);
+    const _openreviewForumUrlPattern = /openreview\.net\/forum\?id=([^&]+)/i;
+    const openreviewForumMatch = tab.url.match(_openreviewForumUrlPattern);
 
     let newUrl;
 
@@ -22,8 +26,14 @@ chrome.action.onClicked.addListener((tab) => {
     } else if (alphaxivAbsMatch) {
         const alphaxivId = alphaxivAbsMatch[1];
         newUrl = `https://alphaxiv.org/pdf/${alphaxivId}`;
+    } else if (openreviewPdfMatch) {
+        const openreviewId = openreviewPdfMatch[1];
+        newUrl = `https://openreview.net/forum?id=${openreviewId}`;
+    } else if (openreviewForumMatch) {
+        const openreviewId = openreviewForumMatch[1];
+        newUrl = `https://openreview.net/pdf?id=${openreviewId}`;
     } else {
-        console.log(tab.url, "is not a valid Arxiv/Alphaxiv page.");
+        console.log(tab.url, "is not a valid Arxiv/Alphaxiv/OpenReview page.");
         return;
     }
 
